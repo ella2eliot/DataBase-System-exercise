@@ -68,7 +68,7 @@ def add():  # 添加供應商資訊到資料庫中
     try:
         sql="INSERT INTO 供應商 (供應商統一編號, 供應商名稱, 電話, Email, 負責人) VALUES(?,?,?,?,?)"
         sql_= (supplier_num.get(), supplier_name.get(), supplier_tel.get(), supplier_email.get(), supplier_person.get())
-        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
         cursor = conn.cursor()
         cursor.execute(sql, sql_)
         conn.commit()   # 這句不可或缺，當我們修改資料完成后必須要確認才能真正作用到資料庫里
@@ -128,7 +128,7 @@ def search():    #動態查詢
     
     if supplier_email.get() != '':
         sql = "SELECT * FROM 供應商 WHERE Email='%s'"%(supplier_email.get())
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     cursor = conn.cursor()
     cursor.execute(sql)
     results=cursor.fetchall()
@@ -171,7 +171,7 @@ def getTotall():
     
     if supplier_email.get() != '':
         sql = "SELECT * FROM 供應商 WHERE Email='%s'"%(supplier_email.get())
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     cursor = conn.cursor()
     cursor.execute(sql)
     results=cursor.fetchall()
