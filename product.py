@@ -43,7 +43,7 @@ def insert_product():
     product_name.place(x=115, y=150) 
     
     sql="SELECT 供應商名稱 FROM 供應商"
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     Label(win, text='供應商名稱：', font=('宋體', 12)).place(x=210, y=150)
     cursor = conn.cursor()
     cursor.execute(sql)
@@ -97,7 +97,7 @@ def add():  # 添加花草苗木資訊到資料庫中
     try:
         sql="INSERT INTO 產品 (花草苗木名稱, 供應商名稱, 公司內現有數量, 單位, 單價, 公司內存放位置, 進貨日期) VALUES(?,?,?,?,?,?,?)"
         sql_= (product_name.get(), supplier_name.get(), amount.get(), unit_list.get(), price.get(), pos_list.get(), cal.get())
-        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
         cursor = conn.cursor()
         cursor.execute(sql, sql_)
         conn.commit()   # 這句不可或缺，當我們修改資料完成后必須要確認才能真正作用到資料庫里
@@ -157,7 +157,7 @@ def search():    #動態查詢
         sql = "SELECT * FROM 產品"
     else:
         sql = "SELECT * FROM 產品 WHERE 花草苗木名稱='%s'"%(product_name.get())
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     cursor = conn.cursor()
     cursor.execute(sql)
     results=cursor.fetchall()
@@ -200,7 +200,7 @@ def getTotall():
         sql = "SELECT 小計 FROM 產品"
     else:
         sql = "SELECT 小計 FROM 產品 WHERE 花草苗木名稱='%s'"%(product_name.get())
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     cursor = conn.cursor()
     cursor.execute(sql)
     results=cursor.fetchall()
