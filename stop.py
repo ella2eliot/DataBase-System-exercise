@@ -84,7 +84,7 @@ def add():#添加客戶資訊到資料庫中
         age=str(calculate_age(getbirth))
         sql="INSERT INTO 靜止戶 ([身分證字號/統一編號], [客戶姓名], [生日], [電話], [Email], [會員折扣], [年齡]) VALUES(?,?,?,?,?,?,?)"
         sql_= (a_name.get(),b_name.get(),birth.get(),phone.get(),Email.get(),coupon.get(),age)
-        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/Users/tina0_000\Desktop/newDB/DB.accdb;')
+        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
         conn.cursor()#呼叫使用的意思
         cursor = conn.cursor()
         try:
@@ -108,7 +108,7 @@ def add_fixedCusInfo():
         except Exception as ex:#更詳細的找錯誤原因
             print('sql_')
             print(ex)
-        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/Users/tina0_000\Desktop/newDB/DB.accdb;')
+        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
         conn.cursor()#呼叫使用的意思   
         cursor = conn.cursor()
         cursor.execute(sql, sql_)
