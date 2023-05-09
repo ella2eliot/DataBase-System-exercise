@@ -182,7 +182,7 @@ def search():
             except Exception as ex:#更詳細的找錯誤原因
                 print(ex)
 
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/Users/tina0_000\Desktop/newDB/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     cursor = conn.cursor()
     cursor.execute(sql)
     results=cursor.fetchall()
