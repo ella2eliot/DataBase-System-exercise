@@ -38,7 +38,7 @@ def insert_order():
     lable1 = Label(win, text='新增訂單資訊:', font=('微軟雅黑', 20)).place(x=30, y=50)
 
     sql="SELECT [花草苗木名稱] FROM 產品"
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     Label(win, text='植物名稱：', font=('宋體', 12)).place(x=365, y=150)
     cursor = conn.cursor()
     cursor.execute(sql)
@@ -54,7 +54,7 @@ def insert_order():
     print(product_name.get())
 
     sql="SELECT [身分證字號/統一編號] FROM 客戶"
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     Label(win, text='客戶身分證字號/統一編號：', font=('宋體', 12)).place(x=30, y=150)
     cursor = conn.cursor()
     cursor.execute(sql)
@@ -116,7 +116,7 @@ def insert_order():
 def add():  # 添加資訊到資料庫中
     try:
         sql = "SELECT 花草苗木編號 FROM 產品 WHERE 花草苗木名稱='%s'"%(product_name.get())
-        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
         cursor = conn.cursor()
         cursor.execute(sql)
         results=cursor.fetchall()
@@ -124,7 +124,7 @@ def add():  # 添加資訊到資料庫中
         conn.close()
   
         sql = "SELECT 供應商名稱 FROM 產品 WHERE 花草苗木名稱='%s'"%(product_name.get())
-        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
         cursor = conn.cursor()
         cursor.execute(sql)
         results=cursor.fetchall()
@@ -134,7 +134,7 @@ def add():  # 添加資訊到資料庫中
         totall_price = int(amount.get()) * int(price.get())
 
         sql = "SELECT [會員折扣] FROM [客戶] WHERE [身分證字號/統一編號]='%s'"%(person_num.get())
-        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+        conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
         cursor = conn.cursor()
         cursor.execute(sql)
         results=cursor.fetchall()
@@ -151,7 +151,7 @@ def add():  # 添加資訊到資料庫中
         try:
             sql="INSERT INTO 客戶購買 ([花草苗木編號], [客戶身分證字號/統一編號], [花草苗木名稱], [供應商名稱], [購買數量], [售價], [總金額], [折扣後金額], [訂購日期], [預計交貨日期], [實際交貨日期]) VALUES(?,?,?,?,?,?,?,?,?,?,?)"
             sql_= (product_num[0], person_num.get(), product_name.get(), supplier_name[0], amount.get(), price.get(), totall_price, afteroff, order_date.get(), ED_date.get(), AD_date.get())
-            conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+            conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
             cursor = conn.cursor()
             cursor.execute(sql, sql_)   #error
             conn.commit()   # 這句不可或缺，當我們修改資料完成后必須要確認才能真正作用到資料庫里
@@ -182,7 +182,7 @@ def search_order():
     # person_num.place(x=415,y=150)
 
     sql="SELECT [身分證字號/統一編號] FROM 客戶"
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     Label(win, text='客戶身分證字號/統一編號：', font=('宋體', 12)).place(x=215, y=150)
     cursor = conn.cursor()
     cursor.execute(sql)
@@ -241,7 +241,7 @@ def search():    #動態查詢
         sql = "SELECT * FROM [客戶購買]"
     else:
         sql = "SELECT * FROM [客戶購買] WHERE [客戶身分證字號/統一編號]='%s'"%(person_num.get())
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     cursor = conn.cursor()
     cursor.execute(sql)
     results=cursor.fetchall()
@@ -284,7 +284,7 @@ def getTotall():
         sql = "SELECT [總金額] FROM [客戶購買]"
     else:
         sql = "SELECT [總金額]  FROM [客戶購買] WHERE [客戶身分證字號/統一編號]='%s'"%(person_num.get())
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/盈琪作業區/大三/資料庫/資料庫project/GardenShop/DB.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=../DB.accdb;')
     cursor = conn.cursor()
     cursor.execute(sql)
     results=cursor.fetchall()
